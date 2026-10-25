@@ -1,0 +1,197 @@
+{
+  "ApplicationSHA256": "D3AE9112FC0B49A6A4DD64C6DB2885C1B12B215AC1B3DCE38BE990699873667F",
+  "Suite": {
+    "Application": "MOONLIGHT.exe",
+    "Finished": "2026-10-25T19:41:06.8225066+08:00",
+    "OS": "Microsoft Windows NT 10.0.26300.0",
+    "Results": [
+      {
+        "Details": "06:59:59, 07:00:00, 18:59:59, 19:00:00 correct.",
+        "Milliseconds": 1,
+        "Name": "Schedule / exact normal boundaries",
+        "Passed": true
+      },
+      {
+        "Details": "20:00 to 06:00 wraps correctly.",
+        "Milliseconds": 0,
+        "Name": "Schedule / cross-midnight light interval",
+        "Passed": true
+      },
+      {
+        "Details": "Strictly future boundary; tomorrow rollover correct.",
+        "Milliseconds": 1,
+        "Name": "Schedule / next boundary and next day",
+        "Passed": true
+      },
+      {
+        "Details": "8,640 sampled minutes; two transitions/day, correct duration and next event.",
+        "Milliseconds": 2,
+        "Name": "Schedule / full-day invariants for six schedules",
+        "Passed": true
+      },
+      {
+        "Details": "Five invalid configurations rejected.",
+        "Milliseconds": 0,
+        "Name": "Validation / equal times, range, language, schema",
+        "Passed": true
+      },
+      {
+        "Details": "Invalid mode, missing expiry, orphan expiry rejected.",
+        "Milliseconds": 0,
+        "Name": "Validation / invalid temporary modes",
+        "Passed": true
+      },
+      {
+        "Details": "Saved values and .bak verified; no leftover write file.",
+        "Milliseconds": 70,
+        "Name": "Persistence / round trip and atomic backup",
+        "Passed": true
+      },
+      {
+        "Details": "Valid backup restored; corrupt original retained.",
+        "Milliseconds": 17,
+        "Name": "Persistence / corrupt primary recovered from backup",
+        "Passed": true
+      },
+      {
+        "Details": "Defaults recovered with accurate warning.",
+        "Milliseconds": 8,
+        "Name": "Persistence / both copies corrupt fall back safely",
+        "Passed": true
+      },
+      {
+        "Details": "Missing primary restored from backup.",
+        "Milliseconds": 10,
+        "Name": "Persistence / missing primary recovers backup",
+        "Passed": true
+      },
+      {
+        "Details": "Filesystem error did not replace live configuration.",
+        "Milliseconds": 12,
+        "Name": "Persistence / failed save leaves live settings unchanged",
+        "Passed": true
+      },
+      {
+        "Details": "Paused schedule performs no writes; manual toggle still works.",
+        "Milliseconds": 5,
+        "Name": "Engine / disabled schedule and manual toggle",
+        "Passed": true
+      },
+      {
+        "Details": "Override persisted, cleared at exact boundary, then followed next day's plan.",
+        "Milliseconds": 9,
+        "Name": "Engine / manual override survives restart and expires",
+        "Passed": true
+      },
+      {
+        "Details": "Neither path modifies theme or override in high-contrast mode.",
+        "Milliseconds": 4,
+        "Name": "Engine / high contrast blocks automatic and manual changes",
+        "Passed": true
+      },
+      {
+        "Details": "120 ticks: one initial theme change, zero config rewrites.",
+        "Milliseconds": 4,
+        "Name": "Engine / unchanged ticks do not rewrite settings or theme",
+        "Passed": true
+      },
+      {
+        "Details": "Wake catches up; one option controls both Windows and app themes, including the disabled state.",
+        "Milliseconds": 7,
+        "Name": "Engine / wake catch-up and combined Windows scope",
+        "Passed": true
+      },
+      {
+        "Details": "Real per-user Run value round trip; quoted Unicode path; test value removed.",
+        "Milliseconds": 2,
+        "Name": "Startup / actual HKCU registration and cleanup",
+        "Passed": true
+      },
+      {
+        "Details": "Singleton identities are path-stable and profile-isolated.",
+        "Milliseconds": 3,
+        "Name": "Identity / consistent path and isolated test profile",
+        "Passed": true
+      },
+      {
+        "Details": "Every UI/tray string has both languages; default English; no parentheses in either catalog.",
+        "Milliseconds": 2,
+        "Name": "Localization / English defaults and complete bilingual strings",
+        "Passed": true
+      },
+      {
+        "Details": "Chinese and English round trip; theme and schedule retained.",
+        "Milliseconds": 16,
+        "Name": "Localization / language persistence preserves schedule and manual mode",
+        "Passed": true
+      },
+      {
+        "Details": "Exact three-checkbox layout; language centered between actions; no old title/card/footer.",
+        "Milliseconds": 77,
+        "Name": "Layout / requested controls, ordering, and compact branding",
+        "Passed": true
+      },
+      {
+        "Details": "Language selector event updates immediately in both directions while preserving unsaved inputs.",
+        "Milliseconds": 27,
+        "Name": "Layout / immediate language switch keeps unsaved controls",
+        "Passed": true
+      },
+      {
+        "Details": "Prior time/enable settings retained, combined scope and English default applied.",
+        "Milliseconds": 4,
+        "Name": "Upgrade / prior schedule converted to combined theme option",
+        "Passed": true
+      },
+      {
+        "Details": "Actual Windows personalization DWORDs verified at 0/0 and 1/1; WM_SETTINGCHANGE sent.",
+        "Milliseconds": 286,
+        "Name": "Windows / real dark then light theme",
+        "Passed": true
+      },
+      {
+        "Details": "Unselected theme preserved; already-correct mode is a no-op.",
+        "Milliseconds": 508,
+        "Name": "Windows / apps-only and system-only",
+        "Passed": true
+      },
+      {
+        "Details": "First launch: dark; second: light; singleton forwarding and hidden settings verified. Working set 39 MB.",
+        "Milliseconds": 1096,
+        "Name": "Executable / two ordinary launches toggle both ways, one tray instance",
+        "Passed": true
+      },
+      {
+        "Details": "Persistent temporary override verified; background duplicate does not toggle.",
+        "Milliseconds": 536,
+        "Name": "Executable / automatic mode keeps manual toggle until next boundary",
+        "Passed": true
+      },
+      {
+        "Details": "Native settings window created and responsive. Control clicking / visual appearance not tested.",
+        "Milliseconds": 480,
+        "Name": "Executable / settings window startup smoke test",
+        "Passed": true
+      },
+      {
+        "Details": "Real boundary 19:41:00; dark applied 6.5 s later. No clock manipulation.",
+        "Milliseconds": 30558,
+        "Name": "Executable / real clock boundary triggers automatic change",
+        "Passed": true
+      }
+    ],
+    "Started": "2026-10-25T19:40:32.9007207+08:00",
+    "ThemeRestored": true
+  },
+  "DesktopVerification": {
+    "Timestamp": "2026-10-25T19:42:26.4632208+08:00",
+    "Application": "Desktop/MOONLIGHT.exe",
+    "Passed": true,
+    "FirstLaunchBackground": "#FFFFFFFF",
+    "DefaultLanguage": "en",
+    "ScheduleMigrated": true,
+    "SecondLaunchBackground": "#FF000000",
+    "StartupMigrated": true,
+    "ThemeRestored": true
+  }
+}

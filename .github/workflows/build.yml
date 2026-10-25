@@ -1,0 +1,35 @@
+name: Build MOONLIGHT
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        shell: powershell
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+      - name: Build
+        run: .\scripts\Build.ps1
+      - name: Run unit and layout tests
+        run: .\scripts\Test.ps1
+      - name: Upload portable app and test result
+        uses: actions/upload-artifact@v7
+        with:
+          name: MOONLIGHT-windows
+          path: |
+            build/MOONLIGHT.exe
+            build/test-results/unit.json
+            README.md
+            README.en.md
+            LICENSE
+          if-no-files-found: error

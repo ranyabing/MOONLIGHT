@@ -1,0 +1,13 @@
+/build/
+/artifacts/
+/test-results/
+/test-data-*/
+/.vs/
+*.user
+*.suo
+*.log
+settings.json
+settings.json.bak
+Thumbs.db
+Desktop.ini
+.DS_Store

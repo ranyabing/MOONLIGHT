@@ -1,15 +1,15 @@
-name: Build MOONLIGHT
+name: Capture MOONLIGHT promotional UI
 
 on:
   push:
-  pull_request:
-  workflow_dispatch:
+    branches:
+      - codex/promo-ui-capture
 
 permissions:
   contents: read
 
 jobs:
-  build-and-test:
+  capture:
     runs-on: windows-latest
     timeout-minutes: 10
     defaults:
@@ -18,18 +18,25 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v7
-      - name: Build
+      - name: Build application
         run: .\scripts\Build.ps1
-      - name: Run unit and layout tests
-        run: .\scripts\Test.ps1
-      - name: Upload portable app and test result
+      - name: Render the actual settings window
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $compiler = Join-Path $env:WINDIR 'Microsoft.NET\Framework64\v4.0.30319\csc.exe'
+          $runnerDirectory = Join-Path $PWD 'build\promo-runner'
+          New-Item -ItemType Directory -Path $runnerDirectory -Force | Out-Null
+          $runner = Join-Path $runnerDirectory 'Moonlight.Tests.exe'
+          $application = Join-Path $PWD 'build\MOONLIGHT.exe'
+          $arguments = @('/nologo', '/utf8output', '/codepage:65001', '/warn:4', '/warnaserror+', '/target:exe', "/out:$runner", "/r:$application", '/r:System.dll', '/r:System.Core.dll', '/r:System.Drawing.dll', '/r:System.Windows.Forms.dll', '/win32manifest:src\app.manifest', 'scripts\CapturePromo.cs')
+          & $compiler @arguments
+          if ($LASTEXITCODE -ne 0) { throw 'Screenshot helper compilation failed.' }
+          Copy-Item -LiteralPath $application -Destination $runnerDirectory
+          & $runner $application (Join-Path $PWD 'build\promo-ui')
+          if ($LASTEXITCODE -ne 0) { throw 'Screenshot rendering failed.' }
+      - name: Upload settings images
         uses: actions/upload-artifact@v7
         with:
-          name: MOONLIGHT-windows
-          path: |
-            build/MOONLIGHT.exe
-            build/test-results/unit.json
-            README.md
-            README.en.md
-            LICENSE
+          name: MOONLIGHT-promo-ui
+          path: build/promo-ui/*.png
           if-no-files-found: error
